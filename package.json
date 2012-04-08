@@ -1,0 +1,8 @@
+{
+    "name" : "streaming-xhr-test",
+    "version" : "0.0.1",
+    "dependencies" : {
+        "request" : "~2.9.152",
+        "ecstatic" : "~0.1.4"
+    }
+}
