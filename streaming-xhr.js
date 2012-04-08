@@ -1,4 +1,5 @@
-var EventEmitter = require('events').EventEmitter
+var stream = require('stream')
+var util = require('util')
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -22,6 +23,7 @@ function fetch(url, outputSelector) {
 }
 
 function XHRStream(xhr) {
+  stream.Stream.call(this)
   var me = this
   me.xhr = xhr
   me.offset = 0
@@ -31,7 +33,7 @@ function XHRStream(xhr) {
   xhr.send(null)
 }
 
-XHRStream.prototype = new EventEmitter
+util.inherits(XHRStream, stream.Stream)
 
 XHRStream.prototype.handle = function () {
   if (this.xhr.readyState === 3) this.write()
