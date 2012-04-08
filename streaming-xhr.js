@@ -24,7 +24,7 @@ function fetch(url, outputSelector) {
   
   json.on('data', function(data) {
     var span = document.createElement('span')
-    span.innerHTML = data + '<br>'
+    span.innerHTML = JSON.stringify(data) + '<br>'
     count.appendChild(span)
   })
   json.on('end', function() { })
