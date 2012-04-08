@@ -1,10 +1,15 @@
+var buffers = require('buffer')
+console.log(buffers)
+var Buffer = buffers.Buffer
+var SlowBuffer = buffers.SlowBuffer
 var stream = require('stream')
 var util = require('util')
+var JSONStream = require('JSONStream')
 
 document.addEventListener('DOMContentLoaded', function() {
 
-  fetch('http://localhost:8001/octet-stream', '#octet-stream')
-  fetch('http://localhost:8001/json', '#json')
+  // fetch('http://max.ic.ht/couch-irc-logs', '#octet-stream')
+  fetch('http://localhost:8001/couch-irc-logs', '#output')
   
 })
 
@@ -14,12 +19,15 @@ function fetch(url, outputSelector) {
   xhr.open("GET", url, true)
   var stream = new XHRStream(xhr)
   
-  stream.on('data', function(data) {
+  var json = JSONStream.parse(['rows', /./, 'doc'])
+  stream.pipe(json)
+  
+  json.on('data', function(data) {
     var span = document.createElement('span')
     span.innerHTML = data + '<br>'
     count.appendChild(span)
   })
-  stream.on('end', function() { })
+  json.on('end', function() { })
 }
 
 function XHRStream(xhr) {

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 var http = require('http')
+var request = require('request')
 var ecstatic = require('ecstatic')(__dirname)
 
 function countdown(req, res) {
@@ -14,10 +15,9 @@ function countdown(req, res) {
 }
 
 var server = http.createServer(function (req, res) {
-  if (req.url === '/octet-stream') {
-    res.setHeader('content-type', 'multipart/octet-stream')
-    countdown(req, res)
-  } else if (req.url === '/json') {
+  if (req.url === '/couch-irc-logs') {
+    request('http://max.ic.ht/couch-irc-logs/_all_docs?include_docs=true').pipe(res)
+  } else if (req.url === '/countdown') {
     res.setHeader('content-type', 'application/json')
     countdown(req, res)
   } else {
