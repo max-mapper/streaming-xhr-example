@@ -1,7 +1,8 @@
 #!/usr/bin/env node
+// only use this file when you aren't running it as a couchapp
 var http = require('http')
 var request = require('request')
-var ecstatic = require('ecstatic')(__dirname)
+var ecstatic = require('ecstatic')(__dirname + '/attachments')
 
 function countdown(req, res) {
   var n = 10

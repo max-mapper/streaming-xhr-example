@@ -54,12 +54,10 @@ document.addEventListener('DOMContentLoaded', function() {
         .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
   })
   
-  fetch('http://localhost:8001/proxy', '#output')
+  fetch(window.location.href + '/db/_all_docs?include_docs=true')
 })
 
-function fetch(url, outputSelector) {
-  var counter = 0
-  var count = document.querySelectorAll(outputSelector)[0]
+function fetch(url) {
   var xhr = new XMLHttpRequest()
   xhr.open("GET", url, true)
   var stream = new XHRStream(xhr)
