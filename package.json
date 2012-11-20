@@ -4,6 +4,7 @@
     "dependencies" : {
         "request" : "2.9.152",
         "ecstatic" : "0.1.4",
-        "JSONStream" : "0.2.0"
+        "JSONStream" : "0.2.0",
+        "stream-statistics": "0.0.1"
     }
 }
