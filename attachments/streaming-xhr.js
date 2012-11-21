@@ -33,7 +33,11 @@ XHRStream.prototype.handle = function () {
 
 XHRStream.prototype.write = function () {
   if (this.xhr.responseText.length > this.offset) {
-    this.emit('data', this.xhr.responseText.slice(this.offset))
+    var chunk = this.xhr.responseText.slice(this.offset)
+    var buf = new Array(chunk.length)
+    for (var i = 0; i < chunk.length; i++) buf[i] = chunk.charCodeAt(i)
+    chunk = new Int8Array(buf)
+    this.emit('data', chunk)
     this.offset = this.xhr.responseText.length
   }
 }
